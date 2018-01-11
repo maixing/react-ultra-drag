@@ -389,16 +389,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	                allowTransition: this.allowTransition
 	            };
 
-	            var titleBar = _react2.default.createElement(
-	                'div',
-	                { ref: function ref(component) {
-	                        _this2.title = component;
-	                    },
-	                    style: _extends({}, theme.title, titleStyle, {
-	                        cursor: cursor
-	                    }) },
-	                typeof this.props.titleBar !== 'string' ? _react2.default.cloneElement(this.props.titleBar, { dnrState: dnrState }) : this.props.titleBar
-	            );
+	            // let titleBar = (
+	            //     <div ref={(component) => {
+	            //         this.title = component;
+	            //     }}
+	            //          style={{
+	            //              ...theme.title,
+	            //              ...titleStyle,
+	            //              cursor
+	            //          }}>
+	            //         {typeof this.props.titleBar !== 'string' ?
+	            //             React.cloneElement(this.props.titleBar, {dnrState}) : this.props.titleBar}
+	            //     </div>);
 
 	            var childrenWithProps = _react2.default.Children.map(children, function (child) {
 	                return typeof child === 'string' ? child : _react2.default.cloneElement(child, { dnrState: dnrState });
@@ -427,7 +429,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    style: _extends({}, theme.frame, frameTransition, {
 	                        cursor: this.state.cursor
 	                    }, style, this.frameRect, this.clicked ? disableSelect : {}) },
-	                this.props.showHeader ? titleBar : null,
 	                _react2.default.createElement(
 	                    'div',
 	                    { ref: 'content',
@@ -852,16 +853,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	                allowTransition: this.allowTransition
 	            };
 
-	            var titleBar = _react2.default.createElement(
-	                'div',
-	                { ref: function ref(component) {
-	                        _this2.title = component;
-	                    },
-	                    style: _extends({}, theme.title, titleStyle, {
-	                        cursor: cursor
-	                    }) },
-	                typeof this.props.titleBar !== 'string' ? _react2.default.cloneElement(this.props.titleBar, { dnrState: dnrState }) : this.props.titleBar
-	            );
+	            // let titleBar = (
+	            //     <div ref={(component) => {
+	            //         this.title = component;
+	            //     }}
+	            //          style={{
+	            //              ...theme.title,
+	            //              ...titleStyle,
+	            //              cursor
+	            //          }}>
+	            //         {typeof this.props.titleBar !== 'string' ?
+	            //             React.cloneElement(this.props.titleBar, {dnrState}) : this.props.titleBar}
+	            //     </div>);
 
 	            var childrenWithProps = _react2.default.Children.map(children, function (child) {
 	                return typeof child === 'string' ? child : _react2.default.cloneElement(child, { dnrState: dnrState });
@@ -890,7 +893,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    style: _extends({}, theme.frame, frameTransition, {
 	                        cursor: this.state.cursor
 	                    }, style, this.frameRect, this.clicked ? disableSelect : {}) },
-	                this.props.showHeader ? titleBar : null,
 	                _react2.default.createElement(
 	                    'div',
 	                    { ref: 'content',
