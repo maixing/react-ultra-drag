@@ -59,7 +59,6 @@ The default export is <UltraDrag>
                     </div>
                     <UltraDrag
                         style={backgroundColor}
-                        showHeader={false}
                         bound={{left:20,top:20,height:200,width:200}}
                         onResize={this.onResize}
                         resizeIcon={this.getResizeIcon()} ref={(component) => {
