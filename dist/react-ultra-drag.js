@@ -78,7 +78,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.disableSelect = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -100,24 +99,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var disableSelect = exports.disableSelect = {
-	    userSelect: 'none',
-	    WebkitUserSelect: 'none',
-	    msUserSelect: 'none',
-	    MozUserSelect: 'none',
-	    OUserSelect: 'none'
-	};
-
-	function prefixedTransition(transition) {
-	    return transition ? {
-	        transition: transition,
-	        WebkitTransition: transition,
-	        msTransition: transition,
-	        MozTransition: transition,
-	        OTransition: transition
-	    } : {};
-	}
-
 	var ReactUltraDrag = function (_React$Component) {
 	    _inherits(ReactUltraDrag, _React$Component);
 
@@ -126,14 +107,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var _this = _possibleConstructorReturn(this, (ReactUltraDrag.__proto__ || Object.getPrototypeOf(ReactUltraDrag)).call(this, props));
 
-	        var _this$props = _this.props,
-	            transition = _this$props.transition,
-	            theme = _this$props.theme;
-
 	        _this.cursorX = 0;
 	        _this.cursorY = 0;
 	        _this.clicked = null;
-	        _this.allowTransition = false;
 	        _this.frameRect = {
 	            width: 0,
 	            height: 0,
@@ -161,8 +137,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	        _this.state = {
-	            cursor: 'auto',
-	            transition: prefixedTransition(transition ? transition : theme.transition)
+	            cursor: 'auto'
 	        };
 	        if (_this.props.enableDrag) {
 	            _this.mouseMoveListener = _this._onMove.bind(_this);
@@ -188,78 +163,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }, {
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            if (nextProps.transition !== this.props.transition) {
-	                this.setState({ transition: prefixedTransition(nextProps.transition) });
-	            }
-	        }
-	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            this.props.attachedTo.removeEventListener('mousemove', this.mouseMoveListener);
 	            this.props.attachedTo.removeEventListener('mouseup', this.mouseUpListener);
-	        }
-	    }, {
-	        key: 'transform',
-	        value: function transform(state) {
-	            var allowTransition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-	            var updateHistory = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-	            var boundingBox = this.getFrameRect();
-
-	            var top = this.frame.offsetTop;
-	            var left = this.frame.offsetLeft;
-	            var width = boundingBox.width;
-	            var height = boundingBox.height;
-
-	            if (updateHistory) {
-	                this.prevState = {
-	                    top: top,
-	                    left: left,
-	                    width: width,
-	                    height: height
-	                };
-	            }
-
-	            if (!state) return;
-
-	            this.frameRect.top = typeof state.top === 'number' ? state.top : state.bottom ? state.bottom - (state.height || height) : top;
-	            this.frameRect.left = typeof state.left === 'number' ? state.left : state.right ? state.right - (state.width || width) : left;
-	            this.frameRect.width = typeof state.width === 'number' ? state.width : typeof state.right === 'number' && typeof state.left === 'number' ? state.right - state.left : typeof state.right === 'number' ? state.right - this.frameRect.left : width;
-	            this.frameRect.height = typeof state.height === 'number' ? state.height : typeof state.bottom === 'number' && typeof state.top === 'number' ? state.top - state.bottom : typeof state.bottom === 'number' ? state.bottom - this.frameRect.top : height;
-	            this.allowTransition = allowTransition;
-
-	            if (this.props.onTransform) {
-	                setTimeout(this.props.onTransform.bind(this, this.frameRect, this.prevState));
-	            }
-	            this.forceUpdate();
-	        }
-	    }, {
-	        key: 'restore',
-	        value: function restore() {
-	            var allowTransition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-	            this.transform(this.prevState, allowTransition);
-	        }
-	    }, {
-	        key: 'minimize',
-	        value: function minimize() {
-	            var allowTransition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-	            this.transform({ width: 0, height: 0 }, allowTransition);
-	        }
-	    }, {
-	        key: 'maximize',
-	        value: function maximize() {
-	            var allowTransition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-	            this.transform({
-	                top: 0,
-	                left: 0,
-	                width: this.props.attachedTo.innerWidth,
-	                height: this.props.attachedTo.innerHeight
-	            }, allowTransition);
 	        }
 	    }, {
 	        key: 'render',
@@ -281,7 +188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var pervFrameRect = _extends({}, this.frameRect);
 
-	            if (this.clicked) {
+	            if (this.clicked && this.props.enableDrag) {
 	                var hits = this.hitEdges;
 	                var boundingBox = this.clicked.boundingBox;
 
@@ -306,7 +213,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        }
 	                    }
 	                } else if (this.state.cursor === 'move') {
-	                    console.log('render move-->');
 	                    this.frameRect.top = this.clicked.frameTop + (this.cursorY - this.clicked.y) / this.props.scale;
 	                    this.frameRect.left = this.clicked.frameLeft + (this.cursorX - this.clicked.x) / this.props.scale;
 	                }
@@ -323,21 +229,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var dnrState = {
 	                cursor: cursor,
 	                clicked: this.clicked,
-	                frameRect: this.frameRect,
-	                allowTransition: this.allowTransition
+	                frameRect: this.frameRect
 	            };
 	            var childrenWithProps = _react2.default.Children.map(children, function (child) {
 	                return typeof child === 'string' ? child : _react2.default.cloneElement(child, { dnrState: dnrState });
 	            });
 
-	            var frameTransition = animate && this.allowTransition ? this.state.transition : {};
-
-	            if (onMove && (pervFrameRect.top !== this.frameRect.top || pervFrameRect.left !== this.frameRect.left)) {
-	                setTimeout(onMove.bind(this, this.frameRect, pervFrameRect));
+	            if (onMove && this.props.enableDrag && (pervFrameRect.top !== this.frameRect.top || pervFrameRect.left !== this.frameRect.left)) {
+	                onMove.bind(this, this.frameRect, pervFrameRect);
 	            }
 
-	            if (onResize && (pervFrameRect.width !== this.frameRect.width || pervFrameRect.height !== this.frameRect.height)) {
-	                setTimeout(onResize.bind(this, this.frameRect, pervFrameRect));
+	            if (onResize && this.props.enableDrag && (pervFrameRect.width !== this.frameRect.width || pervFrameRect.height !== this.frameRect.height)) {
+	                onResize.bind(this, this.frameRect, pervFrameRect);
 	            }
 	            return _react2.default.createElement(
 	                'div',
@@ -350,13 +253,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            e.preventDefault();
 	                        }
 	                    },
-	                    style: _extends({}, frameTransition, {
+	                    style: _extends({
 	                        position: 'absolute',
 	                        margin: 0,
 	                        padding: 0,
 	                        overflow: 'hidden',
 	                        cursor: this.state.cursor
-	                    }, style, this.frameRect, this.clicked ? disableSelect : {}) },
+	                    }, style, this.frameRect, this.clicked ? {} : {}) },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'contentClassName',
@@ -388,14 +291,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: '_cursorStatus',
 	        value: function _cursorStatus(e) {
+	            if (!this.props.enableDrag) {
+	                return;
+	            }
 	            var boundingBox = this.getFrameRect();
 	            this.cursorX = e.clientX;
 	            this.cursorY = e.clientY;
 	            if (this.clicked) return;
 
-	            var hitRange = this.props.edgeDetectionRange;
+	            var hitRange = this.props.dragSize;
 	            var hitTop = this.cursorY <= boundingBox.top + hitRange;
-	            var hitBottom = this.cursorY >= boundingBox.bottom - hitRange - 5;
+	            var hitBottom = this.cursorY >= boundingBox.bottom - hitRange;
 	            var hitLeft = this.cursorX <= boundingBox.left + hitRange;
 	            var hitRight = this.cursorX >= boundingBox.right - hitRange;
 
@@ -453,7 +359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: '_onMove',
 	        value: function _onMove(e) {
 	            this._cursorStatus(e);
-	            if (this.clicked !== null) {
+	            if (this.clicked !== null && this.props.enableDrag) {
 	                this.forceUpdate();
 	            }
 	        }
@@ -473,12 +379,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    titleStyle: _propTypes2.default.object,
 	    minWidth: _propTypes2.default.number,
 	    minHeight: _propTypes2.default.number,
-	    edgeDetectionRange: _propTypes2.default.number,
-	    transition: _propTypes2.default.string,
+	    dragSize: _propTypes2.default.number,
 	    animate: _propTypes2.default.bool,
 	    onMove: _propTypes2.default.func,
 	    onResize: _propTypes2.default.func,
-	    onTransform: _propTypes2.default.func,
 	    cursorRemap: _propTypes2.default.func,
 	    bound: _propTypes2.default.object.isRequired,
 	    attachedTo: _propTypes2.default.object,
@@ -490,15 +394,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	ReactUltraDrag.defaultProps = {
 	    minWidth: 20,
 	    minHeight: 20,
-	    edgeDetectionRange: 5,
-	    initialWidth: null,
-	    initialHeight: null,
-	    initialTop: null,
-	    initialLeft: null,
+	    dragSize: 10,
 	    animate: true,
 	    attachedTo: window,
 	    scale: 0.5,
 	    enableDrag: true,
+	    onMove: null,
+	    onResize: null,
 	    bound: {},
 	    resizeIcon: null
 	};
