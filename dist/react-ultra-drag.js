@@ -137,7 +137,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	        _this.state = {
-	            cursor: 'auto'
+	            cursor: ''
 	        };
 	        if (_this.props.enableDrag) {
 	            _this.mouseMoveListener = _this._onMove.bind(_this);
@@ -167,6 +167,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function componentWillUnmount() {
 	            this.props.attachedTo.removeEventListener('mousemove', this.mouseMoveListener);
 	            this.props.attachedTo.removeEventListener('mouseup', this.mouseUpListener);
+	        }
+	    }, {
+	        key: 'getRightBottom',
+	        value: function getRightBottom() {
+	            return _react2.default.createElement('div', { style: { position: 'absolute', userSelect: 'none', width: 10, height: 10, right: -10, bottom: -10, cursor: 'se-resize' } });
+	        }
+	    }, {
+	        key: 'getRight',
+	        value: function getRight() {
+	            return _react2.default.createElement('div', { style: { position: 'absolute', userSelect: 'none', width: 20, top: 0, right: -10, bottom: 10, cursor: 'ew-resize' } });
+	        }
+	    }, {
+	        key: 'getLeft',
+	        value: function getLeft() {
+	            return _react2.default.createElement('div', { style: { position: 'absolute', userSelect: 'none', width: 20, top: 0, left: -10, bottom: 10, cursor: 'ew-resize' } });
+	        }
+	    }, {
+	        key: 'getBottom',
+	        value: function getBottom() {
+	            return _react2.default.createElement('div', { style: { position: 'absolute', userSelect: 'none', height: 20, left: 0, bottom: -10, right: 10, cursor: 'ns-resize' } });
+	        }
+	    }, {
+	        key: 'getTop',
+	        value: function getTop() {
+	            return _react2.default.createElement('div', { style: { position: 'absolute', userSelect: 'none', height: 20, right: 10, top: -10, left: 10, cursor: 'ns-resize' } });
 	        }
 	    }, {
 	        key: 'render',
@@ -257,7 +282,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        position: 'absolute',
 	                        margin: 0,
 	                        padding: 0,
-	                        overflow: 'hidden',
+	                        // overflow: 'hidden',
 	                        cursor: this.state.cursor
 	                    }, style, this.frameRect, this.clicked ? {} : {}) },
 	                _react2.default.createElement(
@@ -270,7 +295,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            bottom: 0 }, contentStyle) },
 	                    childrenWithProps
 	                ),
-	                this.props.resizeIcon ? this.props.resizeIcon : null
+	                this.props.resizeIcon ? this.props.resizeIcon : null,
+	                this.props.enableDrag ? this.getRightBottom() : null,
+	                this.props.enableDrag ? this.getBottom() : null,
+	                this.props.enableDrag ? this.getLeft() : null,
+	                this.props.enableDrag ? this.getTop() : null,
+	                this.props.enableDrag ? this.getRight() : null
 	            );
 	        }
 	    }, {
@@ -309,7 +339,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            if (hitTop || hitBottom || hitLeft || hitRight) {
 	                if (hitRight && hitBottom) {
-	                    cursor = 'nwse-resize';
+	                    cursor = 'se-resize';
 	                } else if (hitRight || hitLeft) {
 	                    cursor = 'ew-resize';
 	                } else if (hitBottom || hitTop) {
