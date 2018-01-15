@@ -10,7 +10,9 @@ The default export is <UltraDrag>
     import UltraDrag from 'react-ultra-drag';
 ```
 
-### Demo source
+### [Demo](https://maixing.github.io/drag/index.html#/)
+
+### Example
 
 ```
     import React from 'react';
