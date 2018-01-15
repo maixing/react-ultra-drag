@@ -218,7 +218,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                var boundingBox = this.clicked.boundingBox;
 
 	                if (hits.top || hits.bottom || hits.left || hits.right) {
-	                    console.log('render resize-->');
 	                    if (hits.right) this.frameRect.width = Math.max((this.cursorX - boundingBox.left) / this.props.scale, minWidth) + 'px';
 	                    if (hits.bottom) this.frameRect.height = Math.max((this.cursorY - boundingBox.top) / this.props.scale, minHeight) + 'px';
 
@@ -345,7 +344,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                } else if (hitBottom || hitTop) {
 	                    cursor = 'ns-resize';
 	                }
-	                e.stopPropagation();
+	                // e.stopPropagation();
 	            } else {
 	                if (this.props.showHeader) {
 	                    var titleBounding = this.getTitleRect();
