@@ -25,7 +25,7 @@ The default export is <UltraDrag>
         constructor(props) {
             super(props);
         }
-        onResize(rect,prerect){
+        onChange(rect){
         }
         getResizeIcon(){
             return <div style={{
@@ -62,7 +62,7 @@ The default export is <UltraDrag>
                     <UltraDrag
                         style={backgroundColor}
                         bound={{left:20,top:20,height:200,width:200}}
-                        onResize={this.onResize}
+                        onChange={this.onChange}
                         resizeIcon={this.getResizeIcon()} ref={(component) => {
                             this.dragcp = component;
                     }}>
@@ -79,8 +79,7 @@ The default export is <UltraDrag>
 ```
    scale:number             //default=1,Scale remains the same as the parent element
    enableDrag:boolean       //default=true,Is it allowed to drag and drop
-   onMove:function          //Position change callback function,return currentRect and preRect
-   onResize:function        //width or height change callback function,return currentRect and preRect
+   onChange:function          //Position or size change callback function,return currentRect 
    resizeIcon:component     // React Component,define drag icon
    bound:object             //is a boundary,{left:0,top:0,width:0,heigh:0}
    dragSize:number          //drag icon size default 10
