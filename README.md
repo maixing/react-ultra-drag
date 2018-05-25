@@ -84,6 +84,7 @@ The default export is <UltraDrag>
    bound:object             //is a boundary,{left:0,top:0,width:0,heigh:0}
    dragSize:number          //drag icon size default 10
    getBounder:function      //return currentRect
+   updateBound		//update bound
 ```
 
 ### NOTES
