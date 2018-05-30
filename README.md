@@ -85,6 +85,7 @@ The default export is <UltraDrag>
    dragSize:number          //drag icon size default 10
    getBounder:function      //return currentRect
    updateBound		//update bound
+   onMove		//move callback
 ```
 
 ### NOTES
