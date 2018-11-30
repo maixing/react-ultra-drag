@@ -77,15 +77,18 @@ The default export is <UltraDrag>
 ### API
 
 ```
-   scale:number             //default=1,Scale remains the same as the parent element
-   enableDrag:boolean       //default=true,Is it allowed to drag and drop
-   onChange:function          //Position or size change callback function,return currentRect 
-   resizeIcon:component     // React Component,define drag icon
-   bound:object             //is a boundary,{left:0,top:0,width:0,heigh:0}
-   dragSize:number          //drag icon size default 10
-   getBounder:function      //return currentRect
-   updateBound		//update bound
-   onMove		//move callback
+   scale:number                       //default=1,Scale remains the same as the parent element
+   enableDrag:boolean           //default=true,Is it allowed to drag and drop
+   onChange:function             //Position or size change callback function,return currentRect 
+   resizeIcon:component        // React Component,define drag icon
+   bound:object                      //is a boundary,{left:0,top:0,width:0,heigh:0}
+   dragSize:number                //drag icon size default 10
+   getBounder:function          //return currentRect
+   updateBound		              //update bound
+   onMove		                      //move callback
+   clicked                                //is true,can drag
+   groupSeleced                     //is true,grouped
+
 ```
 
 ### NOTES
