@@ -76,7 +76,7 @@ The default export is <UltraDrag>
 
 ### API
 
-```
+```js
 //default=1,Scale remains the same as the parent element
 scale:number                 
 //default=true,Is it allowed to drag and drop     
@@ -92,13 +92,13 @@ dragSize:number
 //return currentRect  
 getBounder:function          
 //update bound
-updateBound		              
+updateBound:function		              
 //move callback
-onMove		                      
+onMove:function		                      
 //is true,can drag
-clicked                          
+clicked:boolean                          
 //is true,grouped      
-groupSeleced                     
+groupSeleced:boolean                     
 
 ```
 
